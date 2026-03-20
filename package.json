@@ -1,0 +1,55 @@
+{
+  "name": "daga-mcp",
+  "version": "1.0.0",
+  "description": "Thin stdio MCP client for Digital Agency Growth Academy (DAGA)",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "daga-mcp": "dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cvsloane/daga-mcp.git"
+  },
+  "homepage": "https://github.com/cvsloane/daga-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/cvsloane/daga-mcp/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "daga",
+    "courses",
+    "ai-native-agency"
+  ],
+  "author": "Heaviside Group",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "axios": "^1.13.6",
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
