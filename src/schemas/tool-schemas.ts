@@ -2,6 +2,9 @@ import { z } from 'zod'
 
 export const courseSlugSchema = z.string().describe('Course URL slug (e.g., "ai-native-agency-foundations")')
 export const lessonSlugSchema = z.string().describe('Lesson URL slug (e.g., "setting-up-obsidian")')
+export const dryRunSchema = z.boolean().optional().describe(
+  'Simulate without changing DAGA state. Defaults to true unless DAGA_ENABLE_DRY_RUN_BY_DEFAULT=false.',
+)
 
 // Course tools
 export const listCoursesSchema = z.object({
@@ -38,6 +41,7 @@ export const getCourseProgressSchema = z.object({
 export const completeLessonSchema = z.object({
   course_slug: courseSlugSchema,
   lesson_slug: lessonSlugSchema,
+  dry_run: dryRunSchema,
 })
 
 // Product tools

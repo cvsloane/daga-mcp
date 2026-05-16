@@ -43,6 +43,8 @@ codex mcp add daga \
 - Do not paste raw keys into notes, screenshots, docs, chat transcripts, or committed files.
 - Do not commit `.env.local`.
 - Revoke the key in DAGA immediately if you think it was exposed.
+- Progress-changing tools default to dry-run mode. Set `dry_run=false` on the tool call to mark a lesson complete.
+- Set `DAGA_TEST_MODE=true` to force all progress mutations to simulate without API writes.
 
 ## Local development
 

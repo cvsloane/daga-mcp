@@ -6,6 +6,7 @@ import {
   completeLessonSchema,
 } from '../schemas/tool-schemas.js'
 import { createSuccessResult, createErrorResult } from '../utils/results.js'
+import { createDryRunResult, createTestModeResult, isTestMode, resolveDryRun } from '../utils/safety.js'
 
 export function registerProgressTools(server: McpServer): void {
   const client = getDagaClient()
@@ -73,8 +74,18 @@ export function registerProgressTools(server: McpServer): void {
     'daga_complete_lesson',
     'Mark a DAGA lesson as completed',
     completeLessonSchema.shape,
-    async ({ course_slug, lesson_slug }) => {
+    async ({ course_slug, lesson_slug, dry_run }) => {
       try {
+        const details = { course_slug, lesson_slug, action: 'complete_lesson' }
+        const testMode = isTestMode()
+        const effectiveDryRun = testMode ? true : resolveDryRun(dry_run)
+
+        if (effectiveDryRun) {
+          return testMode
+            ? createTestModeResult(`Complete DAGA lesson "${lesson_slug}"`, details)
+            : createDryRunResult(`Complete DAGA lesson "${lesson_slug}"`, details)
+        }
+
         const result = await client.completeLesson(course_slug, lesson_slug)
 
         const message = result.courseCompleted
